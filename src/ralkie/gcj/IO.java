@@ -14,8 +14,8 @@ import static ralkie.gcj.Converter.*;
 
 public class IO {
 
-    public static final String DEFAULT_IN = "in";
-    public static final String DEFAULT_OUT = "out";
+    public static final String DEFAULT_IN = "in.in";
+    public static final String DEFAULT_OUT = "out.out";
 
     public static Dataset read(String filename) throws IOException {
         Dataset dataset = new Dataset();
@@ -35,7 +35,7 @@ public class IO {
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename))) {
             int caseCnt = 1;
             for (String result : results) {
-                writer.write(String.format("Case #%d: %s", caseCnt++, result));
+                writer.write(String.format("Case #%d: %s\n", caseCnt++, result));
             }
         }
     }
@@ -74,16 +74,16 @@ class Dataset {
     }
 
     public List<String> getRow(int row, int fromCol) {
-        return getRow(row, fromCol, rows.get(row).size());
+        return getRow(row, fromCol, rows.get(row).size() - 1);
     }
 
     public List<String> getRow(int row, int fromCol, int toCol) {
-        return rows.get(row).subList(fromCol, toCol);
+        return rows.get(row).subList(fromCol, toCol + 1);
     }
 
     public Dataset subDataset(int fromRow, int toRow) {
         Dataset sub = new Dataset();
-        sub.addAll(rows.subList(fromRow, toRow));
+        sub.addAll(rows.subList(fromRow, toRow + 1));
         return sub;
     }
 }
@@ -106,7 +106,7 @@ class FixedCaser implements Caser {
         int caseCnt = toI(dataset.get(0, 0));
         for (int i = 0; i < caseCnt; i++) {
             int fromRow = i * caseSize + 1;
-            int toRow = fromRow + caseSize;
+            int toRow = fromRow + caseSize - 1;
             cases.add(dataset.subDataset(fromRow, toRow));
         }
         return cases;
@@ -127,7 +127,7 @@ class FloatingCaser implements Caser {
         while (i < dataset.size()) {
             int caseSize = toI(dataset.get(i, 0));
             int fromRow = i;
-            int toRow = fromRow + caseSize;
+            int toRow = fromRow + caseSize - 1;
             cases.add(dataset.subDataset(fromRow, toRow));
         }
         return cases;
