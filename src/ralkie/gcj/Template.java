@@ -23,7 +23,6 @@ public class Template {
     }
 
     private static String solveCase(Dataset c) {
-        System.out.println(c.getRow(0));
         return null;//todo
     }
 
