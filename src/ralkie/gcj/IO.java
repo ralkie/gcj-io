@@ -126,9 +126,10 @@ class FloatingCaser implements Caser {
         int i = 1;
         while (i < dataset.size()) {
             int caseSize = toI(dataset.get(i, 0));
-            int fromRow = i;
+            int fromRow = i + 1;
             int toRow = fromRow + caseSize - 1;
             cases.add(dataset.subDataset(fromRow, toRow));
+            i = toRow + 1;
         }
         return cases;
     }
