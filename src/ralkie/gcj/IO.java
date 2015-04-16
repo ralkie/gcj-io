@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static ralkie.gcj.Converter.*;
+import static ralkie.gcj.Converters.*;
 
 public class IO {
 
@@ -136,7 +136,7 @@ class FloatingCaser implements Caser {
 }
 
 
-class Converter {
+class Converters {
     public static Integer toI(String s) {
         return Integer.valueOf(s);
     }

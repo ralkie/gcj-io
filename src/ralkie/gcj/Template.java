@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import static ralkie.gcj.Converter.toIL;
+import static ralkie.gcj.Converters.*;
 
 public class Template {
     public static void main(String[] args) throws IOException {
