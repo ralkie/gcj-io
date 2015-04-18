@@ -13,10 +13,12 @@ public class Template {
         IO.write(solve(data));
     }
 
-    private static List solve(Dataset ds) {
+    private static List<String> solve(Dataset ds) {
         List<String> result = new ArrayList<>();
         Caser caser = new FixedCaser(ds, 1);
+        int i = 1;
         for (Dataset c : caser.getCases()) {
+            System.out.println("Case " + (i++));
             result.add(solveCase(c));
         }
         return result;
@@ -27,32 +29,20 @@ public class Template {
     }
 
 
+    // -=UTILS=-
 
-    // UTILS
+    // filters
+    private static Integer max(List<Integer> list) {
+        return list.stream().max(Integer::compare).get();
+    }
 
-    //comparators
-    public static final Comparator<Integer> ASC_I = new Comparator<Integer>(){
-        @Override
-        public int compare(Integer o1, Integer o2) {
-            return o1.compareTo(o2);
-        }
-    };
-    public static final Comparator<Integer> DESC_I = new Comparator<Integer>(){
-        @Override
-        public int compare(Integer o1, Integer o2) {
-            return o2.compareTo(o1);
-        }
-    };
-    public static final Comparator<Double> ASC_D = new Comparator<Double>(){
-        @Override
-        public int compare(Double o1, Double o2) {
-            return o1.compareTo(o2);
-        }
-    };
-    public static final Comparator<Double> DESC_D = new Comparator<Double>(){
-        @Override
-        public int compare(Double o1, Double o2) {
-            return o2.compareTo(o1);
-        }
-    };
+    private static Integer min(List<Integer> list) {
+        return list.stream().min(Integer::compare).get();
+    }
+
+    // comparators
+    public static final Comparator<Integer> ASC_I = Integer::compareTo;
+    public static final Comparator<Integer> DESC_I = (o1, o2) -> o2.compareTo(o1);
+    public static final Comparator<Double> ASC_D = Double::compareTo;
+    public static final Comparator<Double> DESC_D = (o1, o2) -> o2.compareTo(o1);
 }
